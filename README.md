@@ -48,11 +48,11 @@ cd bank-marketing-analytics
 
 2. Configure a Virtual Environment:
 
-# Windows (PowerShell)
+ Windows (PowerShell)
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 
-# Mac / Linux terminal
+ Mac / Linux terminal
 python3 -m venv venv
 source venv/bin/activate
 
@@ -68,6 +68,7 @@ python eda_analysis.py
 python -m streamlit run app.py
 
 This will be live at: http://localhost:8501
+Live link of streamlit: https://bankmind-srija-panda-k5yundquywwasgqrpuab35.streamlit.app/
 
 Answers of the questions asked:
 
