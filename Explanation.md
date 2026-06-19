@@ -23,14 +23,34 @@ Q3: Subscription Rate across Age Groups
 * **Findings:** Yes. Unencumbered individuals subscribe at a rate of **16.70%**, while clients carrying existing housing loans fall sharply to **7.70%**.
 * **RM Action Strategy:** Filter out clients with active housing liens to protect margin and efficiency.
 
- 3. How to Execute the Project
-1. Install requirements:
+
+Section 1: Core Technical & Analytical Questions (Everyone)
+
+ 1. What percentage of customers in your dataset have y = yes? What does this imbalance mean for how you'd evaluate a model?
+Approximately **11.70%** of the customers in the dataset have `y = yes` (5,289 out of 45,211 rows). Because the dataset is highly imbalanced, using standard **Accuracy** as an evaluation metric would be highly misleading, as a naive model could simply predict "no" for every client and still achieve ~88% accuracy. Instead, a classification model should be evaluated using metrics like **Precision, Recall, F1-Score, or the Area Under the Precision-Recall Curve (AUPRC)** to ensure it effectively captures actual subscribers without destroying operational efficiency.
+
+ 2. Which job category had the highest subscription rate? Does this make sense to you intuitively?
+The **Student** category had the highest absolute subscription rate at **28.68%**, followed closely by **Retired** individuals at **22.79%**. This makes perfect intuitive sense because both groups are in distinct lifecycle transitions where low-risk, guaranteed financial vehicles are highly attractive. Students are often looking for safe, predictable structural options to start growing limited cash reserves, while retirees prioritize asset preservation and stable yields over high-risk market investments.
+
+
+
+ Section 2: Project Architecture & Execution (Track A Context)
+
+ 3. Key Design Decisions:
+ Data Processing: Data is dynamically ingested using the semicolon delimiter (`sep=';'`). Missing entries explicitly labeled as `"unknown"` were deliberately kept as structural sub-categories to transparently monitor data collection gaps without introducing demographic imputation bias.
+
+ Interactive Interface: Streamlit was deployed as the frontend to give Relationship Managers (RMs) a self-service tool. They can cross-filter client data cohorts dynamically by job, marital status, or housing liabilities without needing to query a database or alter python scripts.
+
+ 4. How to Execute the Project
+
+1. Install Dependencies:
    ```bash
    pip install streamlit pandas matplotlib seaborn
 
-2. After the installation, type the following command:
+  a. Generate Baseline Analysis Plots:
 python eda_analysis.py
 
-3. Next type: python -m streamlit run app.py
+b.Launch the Interactive RM Dashboard Server:
+python -m streamlit run app.py
 
-Finally the output will get visible
+The default web browser will automatically load the live interactive system application at http://localhost:8501
